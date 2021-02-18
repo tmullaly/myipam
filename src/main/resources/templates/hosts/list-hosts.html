@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head th:replace="fragments/header :: header"></head>
+  <meta charset="UTF-8"></meta>
+  <body>
+  
+  <div th:replace="fragments/nav :: nav">&nbsp;</div>
+   
+  <main role="main" class="container">
+
+  <p class="my-5">
+     <a href="/hosts/new" class="btn btn-primary"><i class="fas fa-user-plus ml-2">Add Host</i></a>
+  </p>
+    <div th:if="${not #lists.isEmpty(hosts)}">
+        <h2>Host List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+   				<th>MAC</th>
+                <th>IPv4</th>
+				<th>IPv6</th>
+				<th>VLAN</th>
+				<th>DHCP</th>
+                <th>Show</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="host : ${hosts}">
+                <td th:text="${host.id}"><a href="/hosts/${host.id}">Id</a></td>
+                <td th:text="${host.name}">Name</td>
+                <td th:text="${host.mac}">MAC</td>
+                <td th:text="${host.ipv4}">IPv4</td>
+                <td th:text="${host.ipv6}">IPv6</td>
+                <td>100</td>
+                <td>no</td>
+                <td><a th:href="@{'/hosts/' + ${host.id}}">Show</a></td>
+                <td><a th:href="@{'/hosts/' + ${host.id} + '/edit'}">Edit</a></td>
+                <td><a th:href="@{'/hosts/' + ${host.id} + '/delete'}">Delete</a></td>
+            </tr>
+        </table>
+
+    </div>
+	
+
+  </main><!-- /.container -->
+
+  <div th:replace="fragments/footer :: footer">&nbsp;</div>
+  </body>
+</html>

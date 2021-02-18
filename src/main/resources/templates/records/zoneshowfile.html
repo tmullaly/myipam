@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head th:replace="fragments/header :: header"></head>
+  <meta charset="UTF-8"></meta>
+  <body>
+  
+  <div th:replace="fragments/nav :: nav">&nbsp;</div>
+   
+  <main role="main" class="container">
+        <h2>Bind Zone File for <span th:text="${zone.mname}"></span></h2> 
+        <a th:href="@{'/zones/' + ${zone.id} + '/edit'}" class="btn btn-primary"><i class="fas fa-user-plus ml-2">Edit Zone SOA</i></a>
+        <a th:href="@{'/zones/' + ${zone.id} + '/records'}" class="btn btn-primary"><i class="fas fa-user-plus ml-2">Edit Zone Records</i></a>
+        <p>
+<pre class="screen">$ORIGIN <span th:text="${zone.name}"></span>.
+$TTL <span th:text="${zone.minimum_ttl}"></span>
+@	SOA	<span th:text="${zone.mname}"></span> <span th:text="${zone.rname}"></span> (
+		<span th:text="${zone.serial}"></span> 		; serial
+		<span th:text="${zone.refresh}"></span>     	 	; refresh after 6 hours
+		<span th:text="${zone.retry}"></span>       		; retry after 1 hour
+		<span th:text="${zone.expire}"></span>     		; expire after 1 week
+		<span th:text="${zone.minimum_ttl}"></span> )   		; minimum TTL of 1 day
+<div th:if="${not #lists.isEmpty(records)}">
+<span th:each="record : ${records}"><span th:text="${record.name}">Name</span>	 <span th:text="${record.type}">Type</span>		<span th:text="${record.rdata}">Data</span>
+</div>
+</pre>
+	
+  </main><!-- /.container -->
+
+  <div th:replace="fragments/footer :: footer">&nbsp;</div>
+  </body>
+</html>

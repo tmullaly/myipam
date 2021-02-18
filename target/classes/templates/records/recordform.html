@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head th:replace="fragments/header :: header"></head>
+  <meta charset="UTF-8"></meta>
+  <body>
+  
+  <div th:replace="fragments/nav :: nav">&nbsp;</div>
+   
+  <main role="main" class="container">
+
+    <h2>New Record</h2>
+    <div>
+        <form class="form-horizontal" th:object="${record}" th:action="@{'/zone/' + ${zoneId} + '/record'}" method="post">
+            <input type="hidden" id="zone" name="zone" th:value="${zoneId}"/>
+            
+            
+            <div class="form-group">
+            	<div class="input-group mb-3">
+		  			<div class="input-group-prepend">
+    					<span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+  					</div>
+  					<input type="text" class="form-control" aria-describedby="inputGroup-sizing-default" th:field="*{name}"/>
+				</div>
+			</div>
+            
+            <div class="form-group">
+            	<div class="input-group mb-3">
+		  			<div class="input-group-prepend">
+    					<span class="input-group-text" id="inputGroup-sizing-default">Type</span>
+  					</div>
+  					<input type="text" class="form-control" aria-describedby="inputGroup-sizing-default" th:field="*{type}"/>
+				</div>
+			</div>
+			
+			<div class="form-group">
+            	<div class="input-group mb-3">
+		  			<div class="input-group-prepend">
+    					<span class="input-group-text" id="inputGroup-sizing-default">TTL</span>
+  					</div>
+  					<input type="text" class="form-control" aria-describedby="inputGroup-sizing-default" th:field="*{ttl}"/>
+				</div>
+			</div>
+			
+			<div class="form-group">
+            	<div class="input-group mb-3">
+		  			<div class="input-group-prepend">
+    					<span class="input-group-text" id="inputGroup-sizing-default">Rdata</span>
+  					</div>
+  					<input type="text" class="form-control" aria-describedby="inputGroup-sizing-default" th:field="*{rdata}"/>
+				</div>
+			</div>
+			
+			
+            <div class="row">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+	
+
+  </main><!-- /.container -->
+
+  <div th:replace="fragments/footer :: footer">&nbsp;</div>
+  </body>
+</html>
